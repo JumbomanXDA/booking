@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#5b2bbf">
+<title>Book an Appointment | Dr Ankush Maindad</title>
+<style>
+:root{
+  --primary:#5b2bbf;--primary2:#7c3aed;--ink:#182033;--muted:#667085;
+  --bg:#f7f7fb;--card:#fff;--line:#e6e7ef;--green:#16a34a;--danger:#dc2626;
+  --shadow:0 16px 45px rgba(36,24,75,.10);--radius:22px
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(180deg,#f8f7ff 0,#f7f8fb 55%,#fff 100%);
+font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink)}
+button,input,select,textarea{font:inherit}
+.wrap{max-width:760px;margin:auto;padding:18px 16px 48px}
+.hero{background:linear-gradient(135deg,#43218e,#6d38d8 58%,#8a5cf1);color:#fff;border-radius:28px;padding:28px 22px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;right:-60px;top:-65px;background:rgba(255,255,255,.12)}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;opacity:.82}
+h1{font-size:30px;line-height:1.12;margin:8px 0 10px;letter-spacing:-.03em}
+.hero p{margin:0;opacity:.9;line-height:1.5}.doctor{margin-top:18px;font-weight:750}.phone{margin-top:5px}
+.card{background:var(--card);border:1px solid rgba(230,231,239,.9);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-top:16px}
+.step{display:flex;gap:10px;align-items:center;margin-bottom:18px}.step-badge{width:30px;height:30px;border-radius:50%;background:#efe9ff;color:var(--primary);display:grid;place-items:center;font-weight:800;font-size:13px}
+h2{font-size:19px;margin:0}.hint{font-size:13px;color:var(--muted);margin:6px 0 0}
+label{display:block;font-size:13px;font-weight:750;margin:16px 0 7px}.required{color:var(--danger)}
+input,select,textarea{width:100%;border:1px solid var(--line);background:#fff;border-radius:14px;padding:13px 14px;outline:none;transition:.2s}
+input:focus,select:focus,textarea:focus{border-color:#8b6be8;box-shadow:0 0 0 4px rgba(124,58,237,.10)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.agegrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.radio-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.radio{position:relative}.radio input{position:absolute;opacity:0}.radio span{display:block;border:1px solid var(--line);padding:13px;border-radius:14px;text-align:center;font-weight:700;background:#fff;cursor:pointer}.radio input:checked+span{border-color:var(--primary);background:#f3efff;color:var(--primary)}
+.calendar-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.month{font-weight:800}.nav{display:flex;gap:7px}.nav button{width:36px;height:36px;border:1px solid var(--line);background:#fff;border-radius:11px;cursor:pointer}
+.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.dow{text-align:center;font-size:11px;color:#98a2b3;font-weight:800;padding:4px 0}.day{min-height:42px;border:0;background:transparent;border-radius:11px;color:#c2c6d0;font-weight:700}.day.available{color:#fff;background:var(--green);cursor:pointer}.day.selected{background:var(--primary);box-shadow:0 6px 14px rgba(91,43,191,.25)}.day.today{outline:2px solid #b8a3ed;outline-offset:-2px}
+.slots{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:12px}.slot{border:1px solid var(--line);background:#fff;border-radius:13px;padding:12px;font-weight:750;cursor:pointer}.slot.selected{background:#f1edff;border-color:var(--primary);color:var(--primary)}.slot:disabled{display:none}
+.notice{font-size:12px;color:var(--muted);background:#f7f7fb;padding:11px 12px;border-radius:12px;margin-top:12px}
+.primary{width:100%;border:0;background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;padding:15px;border-radius:15px;font-weight:850;font-size:16px;cursor:pointer;box-shadow:0 10px 22px rgba(91,43,191,.22);margin-top:18px}.primary:disabled{opacity:.55;cursor:not-allowed}
+.service-grid,.location-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.pill{padding:12px;border:1px solid var(--line);border-radius:13px;background:#fff;font-size:13px;font-weight:650}
+.success{display:none;text-align:center}.success.show{display:block}.check{width:58px;height:58px;border-radius:50%;background:#dcfce7;color:#15803d;display:grid;place-items:center;font-size:28px;margin:0 auto 12px}
+.appt{font-size:22px;font-weight:900;color:var(--primary);margin:8px 0}.small{font-size:13px;color:var(--muted);line-height:1.55}
+footer{text-align:center;color:#8a90a0;font-size:12px;margin-top:18px}
+@media(min-width:700px){.wrap{padding-top:28px}.hero{padding:34px}.card{padding:26px}.slots{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <div class="eyebrow">Pediatric Neurology & Epilepsy</div>
+    <h1>Book your child's appointment</h1>
+    <p>Choose your city, select an available visit date and reserve a one-hour appointment slot.</p>
+    <div class="doctor">Dr Ankush Maindad · MD Pediatrics</div>
+    <div class="phone">Consultant Pediatric Neurologist & Epileptologist · 📞 97300 37376</div>
+  </section>
+
+  <form id="bookingForm">
+    <section class="card">
+      <div class="step"><div class="step-badge">1</div><div><h2>Child details</h2><div class="hint">All fields are required unless marked optional.</div></div></div>
+      <label>Child's name <span class="required">*</span></label>
+      <input id="childName" required placeholder="Enter child's full name" autocomplete="name">
+      <label>Child's age <span class="required">*</span></label>
+      <div class="agegrid">
+        <input id="ageValue" type="number" min="0" max="150" required placeholder="Age">
+        <select id="ageUnit" required><option value="">Select unit</option><option>Days</option><option>Months</option><option>Years</option></select>
+      </div>
+      <label>WhatsApp number <span class="required">*</span></label>
+      <input id="whatsapp" type="tel" inputmode="numeric" pattern="[0-9+ ()-]{10,15}" required placeholder="10-digit WhatsApp number">
+    </section>
+
+    <section class="card">
+      <div class="step"><div class="step-badge">2</div><div><h2>Appointment type</h2></div></div>
+      <div class="radio-grid">
+        <label class="radio"><input type="radio" name="patientType" value="New" required><span>New patient</span></label>
+        <label class="radio"><input type="radio" name="patientType" value="Follow-up"><span>Follow-up</span></label>
+      </div>
+      <label>Preferred visit location <span class="required">*</span></label>
+      <select id="location" required><option value="">Select location</option></select>
+    </section>
+
+    <section class="card">
+      <div class="step"><div class="step-badge">3</div><div><h2>Select date & time</h2><div class="hint">Only actual visit dates for the selected location are selectable.</div></div></div>
+      <div class="calendar-head"><div id="monthLabel" class="month"></div><div class="nav"><button type="button" id="prevMonth">‹</button><button type="button" id="nextMonth">›</button></div></div>
+      <div id="calendar" class="calendar"></div>
+      <div id="slotArea" style="display:none">
+        <label>Available time <span class="required">*</span></label>
+        <div id="slots" class="slots"></div>
+        <div class="notice">Appointment slots are 1 hour. Only currently available slots are shown.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="step"><div class="step-badge">4</div><div><h2>Reason for visit</h2><div class="hint">Optional</div></div></div>
+      <textarea id="reason" rows="3" placeholder="e.g. seizures, developmental delay, headache, follow-up..."></textarea>
+    </section>
+
+    <section class="card">
+      <div class="step"><div class="step-badge">5</div><div><h2>Confirm booking</h2><div class="hint">Please check the details before confirming.</div></div></div>
+      <button class="primary" id="submitBtn" type="submit">Confirm Appointment</button>
+    </section>
+  </form>
+
+  <section id="success" class="card success">
+    <div class="check">✓</div><h2>Appointment booked</h2>
+    <div class="appt" id="apptId"></div>
+    <div class="small" id="successText"></div>
+    <div class="notice">Please save your Appointment ID and show it when you visit.</div>
+  </section>
+
+  <section class="card">
+    <div class="step"><div class="step-badge">+</div><div><h2>Major pediatric neurology services</h2></div></div>
+    <div class="service-grid">
+      <div class="pill">Epilepsy & seizures</div><div class="pill">Developmental delay</div>
+      <div class="pill">Autism & ADHD</div><div class="pill">Speech & language delay</div>
+      <div class="pill">Cerebral palsy</div><div class="pill">Headache & migraine</div>
+      <div class="pill">Movement disorders</div><div class="pill">Genetic neurological disorders</div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="step"><div class="step-badge">📍</div><div><h2>Outreach locations</h2></div></div>
+    <div class="location-grid" id="locationList"></div>
+  </section>
+
+  <footer>For queries / booking information: 📞 8010 8242 85</footer>
+</div>
+
+<script>
+/* Paste your deployed Google Apps Script Web App URL here. */
+const API_URL = "https://script.google.com/macros/s/AKfycbxT_e8k7WznZMoCleQDJAnysPALZA872Dj21OJUMpg6GTLCY-BwuY2ktQbEI7BgLUFv/exec";
+
+const LOCATIONS = {
+  "Latur": {rules:"latur", hours:["09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00"]},
+  "Nilanga": {weekday:6, ordinal:[1], start:9, end:13},
+  "Udgir": {weekday:0, ordinal:[2,4], start:9, end:17},
+  "Beed": {weekday:4, ordinal:[2,4], start:10, end:17},
+  "Ambajogai": {weekday:0, ordinal:[1,3], start:14, end:18},
+  "Parli": {weekday:0, ordinal:[1,3], start:9, end:13},
+  "Dharashiv": {weekday:4, ordinal:[1,3], start:9, end:13},
+  "Barshi": {weekday:4, ordinal:[1,3], start:15, end:17},
+  "Omerga": {weekday:6, rules:"omerga", start:9, end:13}
+};
+
+const locationEl = document.getElementById("location");
+Object.keys(LOCATIONS).forEach(x=>locationEl.insertAdjacentHTML("beforeend",`<option>${x}</option>`));
+document.getElementById("locationList").innerHTML = Object.keys(LOCATIONS).map(x=>`<div class="pill">${x}</div>`).join("");
+
+let cursor = new Date(); cursor.setDate(1);
+let selectedDate = "", selectedTime = "";
+
+function pad(n){return String(n).padStart(2,"0")}
+function iso(d){return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`}
+function dateFromISO(s){const [y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d)}
+function ordinalWeek(d){return Math.floor((d.getDate()-1)/7)+1}
+
+function isVisitDate(d, city){
+  const c=LOCATIONS[city]; if(!c) return false;
+  const day=d.getDay();
+  if(c.rules==="latur") return day!==0 && day!==4;
+  if(c.rules==="omerga") return day===6 && ordinalWeek(d)!==1;
+  return day===c.weekday && c.ordinal.includes(ordinalWeek(d));
+}
+function slotList(city,date){
+  const c=LOCATIONS[city];
+  if(c.hours) {
+    if(dateFromISO(date).getDay()===6) return ["15:00","16:00","17:00","18:00","19:00","20:00"];
+    return c.hours;
+  }
+  const out=[]; for(let h=c.start;h<c.end;h++) out.push(`${pad(h)}:00`); return out;
+}
+function fmtTime(t){let [h,m]=t.split(":").map(Number);let ap=h>=12?"PM":"AM";h=h%12||12;return `${h}:${pad(m)} ${ap}`}
+function renderCalendar(){
+  const city=locationEl.value, cal=document.getElementById("calendar");
+  const y=cursor.getFullYear(),m=cursor.getMonth();
+  document.getElementById("monthLabel").textContent=cursor.toLocaleDateString("en-IN",{month:"long",year:"numeric"});
+  cal.innerHTML=["S","M","T","W","T","F","S"].map(x=>`<div class="dow">${x}</div>`).join("");
+  const first=new Date(y,m,1).getDay(), days=new Date(y,m+1,0).getDate();
+  for(let i=0;i<first;i++) cal.insertAdjacentHTML("beforeend","<div></div>");
+  for(let n=1;n<=days;n++){
+    const d=new Date(y,m,n), available=city && isVisitDate(d,city), today=iso(d)===iso(new Date()), sel=iso(d)===selectedDate;
+    const b=document.createElement("button"); b.type="button"; b.className="day"+(available?" available ":"")+(today?" today ":"")+(sel?" selected":""); b.textContent=n; b.disabled=!available;
+    if(available)b.onclick=()=>selectDate(iso(d));
+    cal.appendChild(b);
+  }
+  if(!city){ document.getElementById("slotArea").style.display="none"; return; }
+}
+async function selectDate(date){
+  selectedDate=date; selectedTime="";
+  renderCalendar();
+  document.getElementById("slotArea").style.display="block";
+  await renderSlots();
+}
+async function renderSlots(){
+  const city=locationEl.value, slotsEl=document.getElementById("slots");
+  slotsEl.innerHTML="";
+  let slots=slotList(city,selectedDate);
+  if(API_URL.includes("PASTE_YOUR")) {
+    slots.forEach(t=>addSlot(t,true)); return;
+  }
+  try{
+    const r=await fetch(`${API_URL}?action=availability&city=${encodeURIComponent(city)}&date=${selectedDate}`);
+    const data=await r.json();
+    const available=new Set(data.available||[]);
+    slots=slots.filter(t=>available.has(t));
+  }catch(e){ console.error(e); }
+  slots.forEach(t=>addSlot(t,true));
+  if(!slots.length) slotsEl.innerHTML='<div class="notice" style="grid-column:1/-1">No available appointments for this date. Please choose another date.</div>';
+}
+function addSlot(t,enabled){
+  const b=document.createElement("button");b.type="button";b.className="slot";b.textContent=fmtTime(t);b.disabled=!enabled;
+  b.onclick=()=>{document.querySelectorAll(".slot").forEach(x=>x.classList.remove("selected"));b.classList.add("selected");selectedTime=t};document.getElementById("slots").appendChild(b);
+}
+locationEl.addEventListener("change",()=>{selectedDate="";selectedTime="";renderCalendar()});
+document.getElementById("prevMonth").onclick=()=>{cursor.setMonth(cursor.getMonth()-1);renderCalendar()};
+document.getElementById("nextMonth").onclick=()=>{cursor.setMonth(cursor.getMonth()+1);renderCalendar()};
+
+document.getElementById("bookingForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  if(!selectedDate||!selectedTime){alert("Please select an available date and time.");return}
+  const type=document.querySelector('input[name="patientType"]:checked')?.value;
+  const payload={
+    childName:document.getElementById("childName").value.trim(),
+    ageValue:document.getElementById("ageValue").value,
+    ageUnit:document.getElementById("ageUnit").value,
+    whatsapp:document.getElementById("whatsapp").value.trim(),
+    patientType:type, city:locationEl.value, date:selectedDate, time:selectedTime,
+    reason:document.getElementById("reason").value.trim()
+  };
+  const btn=document.getElementById("submitBtn");btn.disabled=true;btn.textContent="Booking…";
+  try{
+    if(API_URL.includes("PASTE_YOUR")){
+      throw new Error("Connect the Google Apps Script Web App URL first.");
+    }
+    const r=await fetch(API_URL,{method:"POST",body:JSON.stringify(payload)});
+    const data=await r.json();
+    if(!data.success) throw new Error(data.message||"Unable to book.");
+    document.getElementById("bookingForm").style.display="none";
+    document.getElementById("apptId").textContent=data.appointmentId;
+    document.getElementById("successText").innerHTML=`${payload.childName} · ${payload.city}<br>${selectedDate} · ${fmtTime(selectedTime)}`;
+    document.getElementById("success").classList.add("show");
+    window.scrollTo({top:0,behavior:"smooth"});
+  }catch(err){alert(err.message);btn.disabled=false;btn.textContent="Confirm Appointment"}
+});
+renderCalendar();
+</script>
+</body>
+</html>
